@@ -1,0 +1,2 @@
+delete npm
+remove package

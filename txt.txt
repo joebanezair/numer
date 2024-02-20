@@ -1,0 +1,408 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+
+import React from 'react';
+import type {Node} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+} from 'react-native';
+
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
+
+const Section = ({children, title}): Node => {
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View style={styles.sectionContainer}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+      </Text>
+      <Text
+        style={[
+          styles.sectionDescription,
+          {
+            color: isDarkMode ? Colors.light : Colors.dark,
+          },
+        ]}>
+        {children}
+      </Text>
+    </View>
+  );
+};
+
+const App: () => Node = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  return (
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <Header />
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
+          <Section title="Step One">
+            Edit <Text style={styles.highlight}>App.js</Text> to change this
+            screen and then come back to see your edits.
+          </Section>
+          <Section title="See Your Changes">
+            <ReloadInstructions />
+          </Section>
+          <Section title="Debug">
+            <DebugInstructions />
+          </Section>
+          <Section title="Learn More">
+            Read the docs to discover what to do next:
+          </Section>
+          <LearnMoreLinks />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const [blindsStructure, setBlindsStructure] = useState([]);
+  // useEffect(() => {
+  //   const gameTime = 3; // Set your game time here
+  //   const raiseBlindTime = 3; // Set your raise blind time here
+  //   setBlindsStructure(constructBlindsStructure(gameTime, raiseBlindTime));
+  // }, []);
+  // function constructBlindsStructure(gameTime, raiseBlindTime) {
+  //   let blindsStructure = [];
+  //   let numberOfIntervals = gameTime / raiseBlindTime;
+  //   for(let i = 0; i < numberOfIntervals; i++) {
+  //       blindsStructure.push({
+  //           Level: i + 1,
+  //           Time: (i + 1) * raiseBlindTime,
+  //           Blinds: `${50 * (i + 1)}/${100 * (i + 1)}` // Modify this line to set the blinds as per your requirement
+  //       });
+  //   }
+  //   return blindsStructure;
+  // }
+
+
+  
+// import React, { useState } from 'react'
+// import { View, SafeAreaView, Text, Button, TouchableOpacity, StyleSheet } from 'react-native'
+// import jsonScs from '../components/jsonScripts.json'
+// import styles from '../design/Style'
+
+// const FirstPage = ({navigateTo}) => {
+
+//   return (<>
+//     <SafeAreaView style={styles.sectionContainer}>
+//       <View>
+//         <Text style={styles.sectionTitle}>{jsonScs.page.pageTxt}</Text>
+//       </View>
+//       <View>
+//         <Text style={styles.Text1}>{jsonScs.page.gameTme}: <"Timer"></Text>
+//       </View>
+//       <View>
+//         <TouchableOpacity 
+//           style={styles.buttonz}
+//            onPress={() => navigateTo('Start')}>
+//           <Text style={styles.Text}>{jsonScs.buttons.btnStart}</Text>
+//         </TouchableOpacity>
+//       </View>
+//     </SafeAreaView>
+//   </>)
+// }
+// export default FirstPage
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import { View, SafeAreaView, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import jsonScs from '../components/jsonScripts.json';
+import styles from '../design/Style';
+
+const FirstPage = ({navigateTo}) => {
+  const [seconds, setSeconds] = useState(210);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(seconds => seconds - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const minutes = Math.floor(seconds / 60);
+  const displaySeconds = seconds % 60;
+
+  return (
+    <>
+      <SafeAreaView style={styles.sectionContainer}>
+        <View>
+          <Text style={styles.sectionTitle}>{jsonScs.page.pageTxt}</Text>
+        </View>
+        <View>
+          <Text style={styles.Text1}>{jsonScs.page.gameTme}: {minutes}:{displaySeconds < 10 ? `0${displaySeconds}` : displaySeconds}</Text>
+        </View>
+        <View>
+          <TouchableOpacity 
+            style={styles.buttonz}
+            onPress={() => navigateTo('Start')}>
+            <Text style={styles.Text}>{jsonScs.buttons.btnStart}</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </>
+  );
+}
+
+export default FirstPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import { View, SafeAreaView, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
+// import jsonScs from '../components/jsonScripts.json';
+// import styles from '../design/Style';
+
+// const FirstPage = ({navigateTo}) => {
+//   const [seconds, setSeconds] = useState(210); //
+//   const [start, setStart] = useState(false);
+
+//   useEffect(() => {
+//     let interval = null;
+//     if (start) {
+//       interval = setInterval(() => {
+//         setSeconds(seconds => seconds - 1);
+//       }, 1000);
+//     } else if (!start && seconds !== 0) {
+//       clearInterval(interval);
+//     }
+//     return () => clearInterval(interval);
+//   }, [start, seconds]);
+
+//   useEffect(() => {
+//     if (seconds === 0) {
+//       navigateTo('Start'); // replace 'EndPage' with the name of the page you want to navigate to
+//     }
+//   }, [seconds]);
+
+//   const minutes = Math.floor(seconds / 60);
+//   const displaySeconds = seconds % 60;
+
+//   return (
+//     <>
+//       <SafeAreaView style={styles.sectionContainer}>
+//         <View>
+//           <Text style={styles.sectionTitle}>{jsonScs.page.pageTxt}</Text>
+//         </View>
+//         <View>
+//           <Text style={styles.Text1}>{jsonScs.page.gameTme} {minutes}:{displaySeconds < 10 ? `0${displaySeconds}` : displaySeconds}</Text>
+//         </View>
+//         <View>
+//           <TouchableOpacity 
+//             style={styles.buttonz}
+//             onPress={() => setStart(true)}>
+//             <Text style={styles.Text}>{start ? (<>{jsonScs.buttons.btnStarting}</>): (<>{jsonScs.buttons.btnStart}</>)}</Text>
+//           </TouchableOpacity>
+//         </View>
+//       </SafeAreaView>
+//     </>
+//   );
+// }
+
+// export default FirstPage;
+
+<DataTable.Header>
+            <DataTable.Title> <Text  style={styles.dataTableText}>{appData.PreviewHeader.lLevel}</Text></DataTable.Title>
+            <DataTable.Title>{appData.PreviewHeader.tTime}</DataTable.Title>
+            <DataTable.Title>{appData.PreviewHeader.bBlinds}</DataTable.Title>
+        </DataTable.Header>
+
+        {appData.appmockdata.map((data, index) => {
+            const blind = parseInt(data.bBlinds);
+            const blinds = parseInt(data.bBlinds) * 2;
+            return (
+              <DataTable.Row key={index}>
+                <DataTable.Cell  >
+                  <Text style={styles.dataTableText}>{data.lLevel}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell >{data.tTime}</DataTable.Cell>
+                <DataTable.Cell >{blind}/{blinds}</DataTable.Cell>
+              </DataTable.Row>
+            );
+        })}
+
+        <DataTable.Row>
+          <DataTable.Cell>
+            <Text style={styles.dataTableText}>{applocaltext.PreviewFooter.lLevel}</Text>
+          </DataTable.Cell>
+          <DataTable.Cell>{appData.PreviewFooter.tTime}</DataTable.Cell>
+          <DataTable.Cell>{appData.PreviewFooter.bBlinds}</DataTable.Cell>
+        </DataTable.Row>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        import React from 'react'
+import {View, SafeAreaView, Text, Button, TouchableOpacity} from 'react-native';
+import { DataTable } from 'react-native-paper';
+import jsonScs from '../components/jsonScripts.json'
+// import raiseBlindsComponents from '../components/jsonScript1.json'
+import styles from '../design/Style';
+
+const Blinds = ({navigateTo}) => {
+  return (<>
+    <SafeAreaView>
+     <View>
+      <TouchableOpacity style={styles.buttonz} onPress={() => navigateTo('MainPage')}>
+        <Text >{jsonScs.PreviewButtonLabel.ButtonNavigate}</Text>
+      </TouchableOpacity>
+     </View>
+     
+     <View>
+  
+      <DataTable>
+        <DataTable.Header>
+         <DataTable.Title> <Text >{jsonScs.PreviewHeader.lLevel}</Text></DataTable.Title>
+         <DataTable.Title><Text >{jsonScs.PreviewHeader.tTime}</Text></DataTable.Title>
+         <DataTable.Title>{jsonScs.PreviewHeader.bBlinds}</DataTable.Title>
+        </DataTable.Header>
+      </DataTable>
+
+      {/* {raiseBlindsComponents.raisenBlindTime.map((data, index)=>{
+        const blind = parseInt(data.bBlinds);
+        const blinds = parseInt(data.bBlinds) * 2;
+        return (
+          <DataTable.Row key={index}>
+            <DataTable.Cell  >
+              <Text style={styles.colblue}>{data.lLevel}</Text>
+            </DataTable.Cell>
+            <DataTable.Cell>
+              {data.tTime}
+            </DataTable.Cell>
+            <DataTable.Cell>
+              {blind}/{blinds}
+            </DataTable.Cell>
+          </DataTable.Row>
+        );
+      })} */}
+
+      <DataTable.Row>
+        <DataTable.Cell>
+          <Text style={styles.dataTableText}>{jsonScs.PreviewFooter.lLevel}</Text>
+        </DataTable.Cell>
+        <DataTable.Cell>
+          <Text style={styles.dataTableText}>{jsonScs.PreviewFooter.tTime}</Text>
+        </DataTable.Cell>
+        <DataTable.Cell>
+          <Text style={styles.dataTableText}>{jsonScs.PreviewFooter.bBlinds}</Text>
+        </DataTable.Cell>
+      </DataTable.Row>
+     </View>
+    </SafeAreaView>
+  </>)
+}
+
+export default Blinds
